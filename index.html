@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple PDF Viewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="toolbar">
+      <div class="toolbar-group">
+        <strong class="title">PDF Viewer</strong>
+      </div>
+      <div class="toolbar-group">
+        <label for="fileInput" class="button">Open PDF</label>
+        <input id="fileInput" type="file" accept="application/pdf" />
+      </div>
+    </header>
+
+    <main class="viewer-shell">
+      <section id="status" class="status" aria-live="polite">Loading PDF...</section>
+      <section id="viewer" class="viewer" aria-label="PDF document pages"></section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

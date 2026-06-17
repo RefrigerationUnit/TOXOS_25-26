@@ -1,0 +1,132 @@
+:root {
+  --toolbar-height: 52px;
+  --bg: #0b0f14;
+  --panel: #ffffff;
+  --text: #e6edf7;
+  --muted: #a6b2c2;
+  --line: #2b3543;
+  --toolbar-bg: #121922;
+  --button-bg: #1a2430;
+  --button-hover: #223142;
+  --button-border: #39485a;
+  --link-hit: rgba(88, 166, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--toolbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--toolbar-bg);
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.button:hover {
+  background: var(--button-hover);
+}
+
+#fileInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.viewer-shell {
+  padding: 1rem;
+}
+
+.status {
+  margin: 0 auto 1rem;
+  width: min(1200px, 100%);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 auto;
+  width: min(1200px, 100%);
+}
+
+.page {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.page-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.annotation-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.annotation-link {
+  position: absolute;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.annotation-link:hover,
+.annotation-link:focus-visible {
+  background: var(--link-hit);
+  outline: 1px solid rgba(37, 99, 235, 0.55);
+}
+
+@media (max-width: 720px) {
+  .viewer-shell {
+    padding: 0.5rem;
+  }
+
+  .toolbar {
+    padding: 0 0.6rem;
+  }
+}
