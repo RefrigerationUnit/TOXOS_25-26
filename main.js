@@ -1,6 +1,7 @@
 const viewerEl = document.getElementById("viewer");
 const statusEl = document.getElementById("status");
-const fileInputEl = document.getElementById("fileInput");
+const themeToggleEl = document.getElementById("themeToggle");
+const downloadLinkEl = document.getElementById("downloadLink");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -14,6 +15,36 @@ let renderJobId = 0;
 let resizeTimer = null;
 let lastViewerWidth = 0;
 let viewerResizeObserver = null;
+let currentDownloadUrl = DEFAULT_PDF_PATH;
+
+function applyTheme(theme) {
+  const isLight = theme === "light";
+  document.body.setAttribute("data-theme", isLight ? "light" : "dark");
+  themeToggleEl.textContent = isLight ? "Dark Mode" : "Light Mode";
+}
+
+function initializeTheme() {
+  const saved = window.localStorage.getItem("pdf-viewer-theme");
+  const theme = saved === "light" ? "light" : "dark";
+  applyTheme(theme);
+}
+
+function toggleTheme() {
+  const isLight = document.body.getAttribute("data-theme") === "light";
+  const nextTheme = isLight ? "dark" : "light";
+  applyTheme(nextTheme);
+  window.localStorage.setItem("pdf-viewer-theme", nextTheme);
+}
+
+function setDownloadUrl(url, fileName) {
+  if (currentDownloadUrl.startsWith("blob:")) {
+    URL.revokeObjectURL(currentDownloadUrl);
+  }
+
+  currentDownloadUrl = url;
+  downloadLinkEl.href = currentDownloadUrl;
+  downloadLinkEl.download = fileName || "document.pdf";
+}
 
 async function loadPdf(source) {
   setStatus("Loading PDF...");
@@ -182,19 +213,6 @@ async function renderLinks(page, viewport, layerEl) {
   }
 }
 
-fileInputEl.addEventListener("change", async (event) => {
-  const [file] = event.target.files || [];
-  if (!file) {
-    return;
-  }
-
-  setStatus(`Loading ${file.name}...`);
-  const data = await file.arrayBuffer();
-  await loadPdf({ data });
-
-  event.target.value = "";
-});
-
 window.addEventListener("resize", onResize);
 
 if ("ResizeObserver" in window) {
@@ -203,5 +221,10 @@ if ("ResizeObserver" in window) {
   });
   viewerResizeObserver.observe(viewerEl);
 }
+
+themeToggleEl.addEventListener("click", toggleTheme);
+
+initializeTheme();
+setDownloadUrl(DEFAULT_PDF_PATH, "TOXOS_25-26.pdf");
 
 loadPdf(DEFAULT_PDF_PATH);

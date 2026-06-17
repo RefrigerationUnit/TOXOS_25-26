@@ -8,12 +8,24 @@
   </head>
   <body>
     <header class="toolbar">
-      <div class="toolbar-group">
-        <strong class="title">PDF Viewer</strong>
+      <div class="toolbar-group toolbar-group-left">
+        <strong class="title">TOXOS</strong>
       </div>
-      <div class="toolbar-group">
-        <label for="fileInput" class="button">Open PDF</label>
-        <input id="fileInput" type="file" accept="application/pdf" />
+      <div class="toolbar-group toolbar-group-center">
+        <button id="themeToggle" class="button" type="button" aria-label="Switch theme">
+          Light Mode
+        </button>
+      </div>
+      <div class="toolbar-group toolbar-group-right">
+        <a
+          id="downloadLink"
+          class="button"
+          href="./TOXOS_25-26.pdf"
+          download="TOXOS_25-26.pdf"
+          aria-label="Download PDF"
+        >
+          Download PDF
+        </a>
       </div>
     </header>
 
