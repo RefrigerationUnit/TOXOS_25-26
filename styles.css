@@ -146,6 +146,45 @@ body {
   outline: 1px solid rgba(37, 99, 235, 0.55);
 }
 
+.scroll-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 12;
+  color: #bfbfbf;
+  font-size: 1rem;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.9;
+  animation: scroll-hint-fade 1s ease-in-out infinite;
+  transition: opacity 0.25s ease;
+}
+
+body[data-theme="light"] .scroll-hint {
+  color: #8f8f8f;
+}
+
+.scroll-hint.is-hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes scroll-hint-fade {
+  0% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
 @media (max-width: 720px) {
   .viewer-shell {
     padding: 0.5rem;

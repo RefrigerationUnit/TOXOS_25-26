@@ -2,6 +2,7 @@ const viewerEl = document.getElementById("viewer");
 const statusEl = document.getElementById("status");
 const themeToggleEl = document.getElementById("themeToggle");
 const downloadLinkEl = document.getElementById("downloadLink");
+const scrollHintEl = document.getElementById("scrollHint");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -168,6 +169,16 @@ function scheduleResponsiveRender() {
 
 function onResize() {
   scheduleResponsiveRender();
+  updateScrollHintVisibility();
+}
+
+function updateScrollHintVisibility() {
+  if (!scrollHintEl) {
+    return;
+  }
+
+  const shouldHide = window.scrollY > 32;
+  scrollHintEl.classList.toggle("is-hidden", shouldHide);
 }
 
 async function renderLinks(page, viewport, layerEl) {
@@ -214,6 +225,7 @@ async function renderLinks(page, viewport, layerEl) {
 }
 
 window.addEventListener("resize", onResize);
+window.addEventListener("scroll", updateScrollHintVisibility, { passive: true });
 
 if ("ResizeObserver" in window) {
   viewerResizeObserver = new ResizeObserver(() => {
@@ -226,5 +238,6 @@ themeToggleEl.addEventListener("click", toggleTheme);
 
 initializeTheme();
 setDownloadUrl(DEFAULT_PDF_PATH, "TOXOS_25-26.pdf");
+updateScrollHintVisibility();
 
 loadPdf(DEFAULT_PDF_PATH);
