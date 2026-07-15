@@ -171,6 +171,128 @@ body[data-theme="light"] .scroll-hint {
   animation: none;
 }
 
+.links-shell {
+  width: min(760px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(3rem, 10vw, 7rem) 0 4rem;
+}
+
+.links-eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.links-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.links-intro {
+  max-width: 34rem;
+  margin: 1.5rem 0 2.5rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.links-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.links-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 600;
+  text-decoration: none;
+  transition: padding 0.2s ease, color 0.2s ease;
+}
+
+.links-list a::after {
+  content: "↗";
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.links-list a:hover,
+.links-list a:focus-visible {
+  padding-right: 0.5rem;
+  color: var(--muted);
+}
+
+.links-list small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.contacts {
+  margin-top: clamp(4rem, 10vw, 7rem);
+}
+
+.contacts-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.contact-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.contact-bubble {
+  display: grid;
+  gap: 0.55rem;
+  justify-items: center;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-bubble img {
+  width: clamp(76px, 16vw, 112px);
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-bubble:hover img,
+.contact-bubble:focus-visible img {
+  filter: grayscale(0%);
+  transform: translateY(-4px);
+  border-color: var(--text);
+}
+
+.contact-bubble:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 @keyframes scroll-hint-fade {
   0% {
     opacity: 0.9;
@@ -212,5 +334,10 @@ body[data-theme="light"] .scroll-hint {
 
   .toolbar-group-center {
     grid-area: center;
+  }
+
+  .links-shell {
+    width: min(100% - 1.5rem, 760px);
+    padding-top: 3rem;
   }
 }
