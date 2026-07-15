@@ -1,7 +1,6 @@
 const viewerEl = document.getElementById("viewer");
 const statusEl = document.getElementById("status");
 const themeToggleEl = document.getElementById("themeToggle");
-const downloadLinkEl = document.getElementById("downloadLink");
 const scrollHintEl = document.getElementById("scrollHint");
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -16,7 +15,6 @@ let renderJobId = 0;
 let resizeTimer = null;
 let lastViewerWidth = 0;
 let viewerResizeObserver = null;
-let currentDownloadUrl = DEFAULT_PDF_PATH;
 
 function applyTheme(theme) {
   const isLight = theme === "light";
@@ -35,16 +33,6 @@ function toggleTheme() {
   const nextTheme = isLight ? "dark" : "light";
   applyTheme(nextTheme);
   window.localStorage.setItem("pdf-viewer-theme", nextTheme);
-}
-
-function setDownloadUrl(url, fileName) {
-  if (currentDownloadUrl.startsWith("blob:")) {
-    URL.revokeObjectURL(currentDownloadUrl);
-  }
-
-  currentDownloadUrl = url;
-  downloadLinkEl.href = currentDownloadUrl;
-  downloadLinkEl.download = fileName || "document.pdf";
 }
 
 async function loadPdf(source) {
@@ -237,7 +225,6 @@ if ("ResizeObserver" in window) {
 themeToggleEl.addEventListener("click", toggleTheme);
 
 initializeTheme();
-setDownloadUrl(DEFAULT_PDF_PATH, "TOXOS_25-26.pdf");
 updateScrollHintVisibility();
 
 loadPdf(DEFAULT_PDF_PATH);
